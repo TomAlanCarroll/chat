@@ -1,39 +1,13 @@
 <!doctype html>
-<!-- The DOCTYPE declaration above will set the    -->
-<!-- browser's rendering engine into               -->
-<!-- "Standards Mode". Replacing this declaration  -->
-<!-- with a "Quirks Mode" doctype may lead to some -->
-<!-- differences in layout.                        -->
-
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-    <!--                                                               -->
-    <!-- Consider inlining CSS to reduce the number of requested files -->
-    <!--                                                               -->
     <link type="text/css" rel="stylesheet" href="Chat.css">
-
-    <!--                                           -->
-    <!-- Any title is fine                         -->
-    <!--                                           -->
     <title>Web Application Starter Project</title>
-
-    <!--                                           -->
-    <!-- This script loads your compiled module.   -->
-    <!-- If you add any GWT meta tags, they must   -->
-    <!-- be added before this line.                -->
-    <!--                                           -->
     <script type="text/javascript" language="javascript" src="Chat/Chat.nocache.js"></script>
   </head>
 
-  <!--                                           -->
-  <!-- The body can have arbitrary html, or      -->
-  <!-- you can leave the body empty if you want  -->
-  <!-- to create a completely dynamic UI.        -->
-  <!--                                           -->
   <body>
-
     <!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
 
@@ -45,19 +19,23 @@
       </div>
     </noscript>
 
-    <h1>Web Application Starter Project</h1>
-
-    <table align="center">
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Please enter your name:</td>
-      </tr>
-      <tr>
-        <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
-      </tr>
-    </table>
+    <h1>Chat</h1>
+    <!-- begin SnapEngage code -->
+    <script type="text/javascript">
+      (function() {
+        var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
+        se.src = '//storage.googleapis.com/code.snapengage.com/js/3fbeda19-8b5b-4b49-a859-19a8f34fc0ef.js';
+        var done = false;
+        se.onload = se.onreadystatechange = function() {
+          if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
+            done = true;
+            /* Place your SnapEngage JS API code below */
+            /* SnapEngage.allowChatSound(true); Example JS API: Enable sounds for Visitors. */
+          }
+        };
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
+      })();
+    </script>
+    <!-- end SnapEngage code -->
   </body>
 </html>
