@@ -1,13 +1,68 @@
 /** Add css rules here for your application. */
+body {
+  color: #000;
+  font: 12px Arial, Helvetica, sans-serif;
+  margin: 10px;
+  padding-left: 30px;
+}
 
+img {
+  border: 0px;
+}
+
+.pro {
+  vertical-align: bottom;
+}
+
+.pro a {
+  color: #3366cc;
+  font: 12px Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: none;
+}
+
+table tbody tr td table {
+  padding: 0px;
+  margin: 0px;
+  border-spacing: 0px;
+}
+
+th, td {
+  vertical-align: top;
+  text-align: left;
+}
+
+th {
+  color: #666;
+  font-weight: normal;
+}
+
+.line .time {
+  color: #666;
+  font-size: 10px;
+  font-style: italic;
+}
+
+.line .alias {
+  font-weight: bold;
+  padding: auto 4px;
+  color: #666;
+}
 
 /** Example rules used by the template application (remove for your app) */
 h1 {
   font-size: 2em;
   font-weight: bold;
   color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
+  text-align: left;
+}
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin: 15px auto 8px auto;
+  font-weight: bold;
 }
 
 .sendButton {

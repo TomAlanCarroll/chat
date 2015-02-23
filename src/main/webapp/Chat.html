@@ -1,41 +1,163 @@
 <!doctype html>
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="Chat.css">
-    <title>Web Application Starter Project</title>
-    <script type="text/javascript" language="javascript" src="Chat/Chat.nocache.js"></script>
-  </head>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link type="text/css" rel="stylesheet" href="Chat.css">
+  <title>Web Application Starter Project</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+  <script src="js/controller.js"></script>
+</head>
+<body ng-app="Chat" ng-controller="ChatController">
+<!-- OPTIONAL: include this if you want history support -->
+<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1'
+        style="position:absolute;width:0;height:0;border:0"></iframe>
 
-  <body>
-    <!-- OPTIONAL: include this if you want history support -->
-    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+<noscript>
+  <div
+      style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+    Your web browser must have JavaScript enabled
+    in order for this application to display correctly.
+  </div>
+</noscript>
+<h1>
+  <span style="display:none">Snap Engage</span>
+  <img src="images/snapengage.png" alt="SnapEngage"/>
+</h1>
 
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-    <noscript>
-      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-        Your web browser must have JavaScript enabled
-        in order for this application to display correctly.
-      </div>
-    </noscript>
+<div ng-repeat="chat in chats">
+  <h2>Request details</h2>
 
-    <h1>Chat</h1>
-    <!-- begin SnapEngage code -->
-    <script type="text/javascript">
-      (function() {
-        var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-        se.src = '//storage.googleapis.com/code.snapengage.com/js/3fbeda19-8b5b-4b49-a859-19a8f34fc0ef.js';
-        var done = false;
-        se.onload = se.onreadystatechange = function() {
-          if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-            done = true;
-            /* Place your SnapEngage JS API code below */
-            /* SnapEngage.allowChatSound(true); Example JS API: Enable sounds for Visitors. */
-          }
-        };
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
-      })();
-    </script>
-    <!-- end SnapEngage code -->
-  </body>
+  <div>
+    <table>
+      <tr ng-if="chat.requested_by">
+        <th scope="row">Requester email:</th>
+        <td>
+          <a href="mailto:{{ chat.requested_by }}">{{ chat.requested_by }}</a>
+        </td>
+      </tr>
+      <tr ng-if="chat.description">
+        <th scope="row">Problem description:</th>
+        <td>
+          {{ chat.description }}
+        </td>
+      </tr>
+      <tr ng-if="chat.page_url">
+        <th scope="row">Website address:</th>
+        <td>
+          <a href="{{ chat.page_url }}">{{ chat.page_url }}</a>
+        </td>
+      </tr>
+      <tr ng-if="chat.entry_url">
+        <th scope="row">Entry page:</th>
+        <td>
+          <a href="{{ chat.entry_url }}">{{ chat.entry_url }}</a>
+        </td>
+      </tr>
+      <tr ng-if="chat.referrer_url">
+        <th scope="row">Coming from:</th>
+        <td>
+          <a href="{{ chat.referrer_url }}" ng-if="chat.referrer_url && chat.referrer_url !== ''">{{ chat.referrer_url
+            }}</a>
+              <span ng-if="chat.referrer_url_alt">Search for {{ chat.referrer_url_alt }} on
+                <a href="http://www.google.com/#q={{ chat.referrer_url_alt_link }}">Google.com</a></span>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">User environment:</th>
+        <td>
+          <table>
+            <tr ng-if="chat.browser">
+              <th scope="row">Browser:</th>
+              <td>
+                {{ chat.browser }}
+              </td>
+            </tr>
+            <tr ng-if="chat.os">
+              <th scope="row">Platform:</th>
+              <td>
+                {{ chat.os }}
+              </td>
+            </tr>
+            <tr ng-if="chat.user_agent">
+              <th scope="row">User Agent:</th>
+              <td>
+                {{ chat.user_agent }}
+              </td>
+            </tr>
+            <tr ng-if="chat.language_code">
+              <th scope="row">Languages:</th>
+              <td>
+                {{ chat.language_code }}
+              </td>
+            </tr>
+            <tr ng-if="chat.plugins">
+              <th scope="row">Plugins:</th>
+              <td>
+                    <span ng-repeat="plugin in chat.plugins" ng-if="plugin.value !== ''">
+                      {{ plugin.name }}={{ plugin.value }}<span ng-if="!$last">, </span>
+                    </span>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">User IP Address:</th>
+        <td>
+          {{ chat.ip_address }}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">User Geo. Location:</th>
+        <td>
+          <span ng-if="chat.requester_details.city">{{ chat.requester_details.city }}</span>
+          <span ng-if="!chat.requester_details.city && chat.city">{{ chat.city }}</span>
+          <span ng-if="chat.requester_details.state || chat.requester_details.country">, </span>
+          <span ng-if="chat.requester_details.state">{{ chat.requester_details.state }}</span>
+          <span ng-if="chat.requester_details.country || chat.country">, </span>
+          <span ng-if="chat.requester_details.country">{{ chat.requester_details.country }}</span>
+          <span ng-if="!chat.requester_details.country && chat.country">{{ chat.country }}</span>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Chat Transcript:</th>
+        <td>
+          <div ng-repeat="line in chat.transcripts" class="line">
+            <span class="time" ng-if="line.formatted_date">({{ line.formatted_date }})</span>
+            <span class="alias">{{ line.alias }}</span>
+            <span class="message">{{ line.message }}</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Date & time:</th>
+        <td>
+          {{ chat.created_at_date }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<!-- begin SnapEngage code -->
+<script type="text/javascript">
+  (function () {
+    var se = document.createElement('script');
+    se.type = 'text/javascript';
+    se.async = true;
+    se.src = '//storage.googleapis.com/code.snapengage.com/js/3fbeda19-8b5b-4b49-a859-19a8f34fc0ef.js';
+    var done = false;
+    se.onload = se.onreadystatechange = function () {
+      if (!done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete')) {
+        done = true;
+        /* Place your SnapEngage JS API code below */
+        /* SnapEngage.allowChatSound(true); Example JS API: Enable sounds for Visitors. */
+      }
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(se, s);
+  })();
+</script>
+<!-- end SnapEngage code -->
+</body>
 </html>
