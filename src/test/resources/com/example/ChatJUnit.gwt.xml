@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module rename-to="Chat">
-  <!-- Inherit our applications main module.                      -->
-  <inherits name='com.example.Chat' />
-
-  <!-- Specify the path to any remote services.                   -->
-  <servlet path="/Chat/greet" class="com.example.server.GreetingServiceImpl" />
-
-</module>
