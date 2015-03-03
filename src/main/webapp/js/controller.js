@@ -1,4 +1,4 @@
-var chatApp = angular.module("Chat", []);
+var chatApp = angular.module("Chat", ['ngMap']);
 
 chatApp.controller("ChatController", function ($scope, $http) {
     var params = {};
